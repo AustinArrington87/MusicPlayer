@@ -5,13 +5,13 @@ import { Audio } from 'expo-av'
 
 const audioBookPlaylist = [
   {
-    title: 'Hamlet - Act I',
-    author: 'William Shakespeare',
-    source: 'Librivox',
+    title: 'Tonic',
+    author: 'Bruce Bama',
+    source: 'Back to Basics',
     uri:
-      'https://ia800204.us.archive.org/11/items/hamlet_0911_librivox/hamlet_act1_shakespeare.mp3',
+      'https://archive.org/download/tonic_201909/Tonic.m4a',
     imageSource:
-      'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
+      'https://archive.org/download/bre_20190911_201909/bre.jpg'
   },
   {
     title: 'Hamlet - Act II',
@@ -143,6 +143,7 @@ renderFileInfo() {
     const { playbackInstance, currentIndex } = this.state
     return playbackInstance ? (
       <View style={styles.trackInfo}>
+       
         <Text style={[styles.trackInfoText, styles.largeText]}>
           {audioBookPlaylist[currentIndex].title}
         </Text>
@@ -152,6 +153,18 @@ renderFileInfo() {
         <Text style={[styles.trackInfoText, styles.smallText]}>
           {audioBookPlaylist[currentIndex].source}
         </Text>
+      </View>
+    ) : null
+  }
+
+renderImgInfo() {
+    const { playbackInstance, currentIndex } = this.state
+    return playbackInstance ? (
+      <View>
+        <Image
+        style={styles.welcomeImage}
+        source = {audioBookPlaylist[currentIndex].imageSource}
+        />
       </View>
     ) : null
   }
@@ -166,7 +179,7 @@ renderFileInfo() {
         <Image
         style={styles.welcomeImage}
         source={
-        require('./assets/wiz.png')
+        require('./assets/img/wiz.png')
         }
         />      
     </View>    
@@ -180,9 +193,10 @@ renderFileInfo() {
   <Image
     style={styles.albumCover}
     source={{
-      uri: 'http://www.archive.org/download/LibrivoxCdCoverArt8/hamlet_1104.jpg'
+      uri: 'https://archive.org/download/bre_20190911_201909/bre.jpg'
     }}
   />
+
   <View style={styles.controls}>
     <TouchableOpacity style={styles.control} onPress={this.handlePreviousTrack}>
       <Ionicons name="ios-skip-backward" size={48} color="#444" />
